@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OpenVT Search App</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav text-center">
+      <h2>OpenVT</h2>
+      <p>Search for similar images.</p>
+      <form id="search-form" class="form-inline" action="{{ url_for('search') }}" method="POST" enctype="multipart/form-data">
+        <hr>
+        <div class="input-group">
+        <input id="file-picker" class="form-control" type="file" name="file" accept="image/*" multiple>
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="input">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+
+      </div>
+      </form>
+      <div id="msg" style="color: #EF5350"><strong></strong></div>
+    </div>
+
+    <div class="col-sm-9">
+      <h2><small>SIMILAR IMAGES</small></h2>
+      <hr style="border-top: 1px solid #333333;">
+      <div class="row">
+          {% for score, path in image_list %}
+          <div class="col-md-2 col-xs-6">
+              <div class="thumbnail">
+                  <img class="img-responsive img-fluid img-thumbnail" src=" {{url_for('send_image', filename=path)}} ">
+                  <div class="caption text-center">
+                    <p>{{'%.5f' % score}}</p>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>Powered by Giulliano Paz</p>
+</footer>
+
+<script>
+
+  $(document).on("submit", "form", function(e){
+    var input = document.getElementById('file-picker');
+    if (input.files.length == 0) {
+      e.preventDefault();
+      alert('No file chosen.');
+      return false;
+    }
+  });
+
+  $("#file-picker").change(function(){
+
+      var input = document.getElementById('file-picker');
+
+      for (var i=0; i<input.files.length; i++)
+      {
+      //koala.jpg, koala.JPG substring(index) lastIndexOf('a') koala.1.jpg
+          var ext= input.files[i].name.substring(input.files[i].name.lastIndexOf('.')+1).toLowerCase()
+
+          if ((ext != 'jpg') && (ext != 'png'))
+          {
+              $("#msg").text("Files are NOT supported. PNG and JPG only.")
+              document.getElementById("file-picker").value ="";
+          }
+          else
+          {
+            $("#msg").text("")
+          }
+
+      }
+
+    } 
+  ); 
+
+    </script>
+
+</body>
+</html>
