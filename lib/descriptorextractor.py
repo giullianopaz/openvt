@@ -5,7 +5,6 @@ import numpy as np
 
 class DescriptorExtractor():
     __slots__ = 'size'
-    """Classe para extrair keypoints e descritores utilizando a classe Surf do OpenCV."""
     def __init__(self):
         self.size = 0
     def extract(self, img_name, feature_detector_alg=None):
