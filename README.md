@@ -35,13 +35,13 @@ Mais informações podem ser obtidas no documento **Monografia.pdf**, o qual exp
 
 #### Passo 2 - Compilar biblioteca C++ 
 	
-	Acessar a pasta c_modules/ e executar:
+Acessar a pasta c_modules/ e executar:
 	
 	$ sudo python3 setup.py build_ext --inplace
 
 #### Passo 3 - Compilar biblioteca Cython
 	
-	Acessar a pasta cython_modules/ e executar:
+Acessar a pasta cython_modules/ e executar:
     	
 	$ cython cp_utils.pyx 
 	
