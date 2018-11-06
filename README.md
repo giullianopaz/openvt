@@ -44,8 +44,8 @@ Mais informações podem ser obtidas no documento **Monografia.pdf**, o qual exp
 	Acessar a pasta cython_modules/ e executar:
     	
 	$ cython cp_utils.pyx 
-
-    	$ sudo python3 setup.py build_ext --inplace
+	
+	$ sudo python3 setup.py build_ext --inplace
 
 #### Passo 4 - Extrair descritores do conjunto de imagens
 
