@@ -1,0 +1,6 @@
+scipy
+cython
+mysqlclient
+psutil
+sklearn
+matplotlib
